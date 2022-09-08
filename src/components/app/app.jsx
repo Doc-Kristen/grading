@@ -11,20 +11,20 @@ import NotFoundPage from 'components/not-found-page/not-found-page';
 
 import { appTheme } from './common';
 import * as S from './app.styled';
-
+import { AppRoute } from 'helps/const';
 
 const App = () => (
   <ThemeProvider theme={appTheme}>
     <S.GlobalStyle />
     <Router>
       <Switch>
-        <Route exact path="/">
+        <Route exact path={AppRoute.Home}>
           <Home />
         </Route>
-        <Route exact path="/quest">
+        <Route exact path={AppRoute.DetailedQuest}>
           <DetailedQuest />
         </Route>
-        <Route exact path="/contacts">
+        <Route exact path={AppRoute.Contacts}>
           <Contacts />
         </Route>
         <Route>
