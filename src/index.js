@@ -3,10 +3,9 @@ import { render } from 'react-dom';
 import App from 'components/app/app';
 import { Provider } from 'react-redux';
 import { store } from './store';
-import { loadQuestList } from './store/action';
-import { mockQuests } from './helps/mock';
+import { fetchQuestsListAction } from './store/api-actions';
 
-store.dispatch(loadQuestList(mockQuests));
+store.dispatch(fetchQuestsListAction());
 
 render(
   <StrictMode>
