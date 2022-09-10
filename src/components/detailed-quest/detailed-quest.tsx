@@ -5,62 +5,77 @@ import { ReactComponent as IconPerson } from 'assets/img/icon-person.svg';
 import { ReactComponent as IconPuzzle } from 'assets/img/icon-puzzle.svg';
 import * as S from './detailed-quest.styled';
 import { BookingModal } from './components/components';
-import { Quest } from 'types/quest';
+import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from 'hooks';
+import { fetchDetailedQuestAction } from 'store/api-actions';
+import { QuestType, LevelType } from '../../helps/const';
 
-type QuestItemProps = {
-  quest: Quest;
-}
+const DetailedQuest = (): JSX.Element => {
 
-const DetailedQuest = ({ quest }: QuestItemProps): JSX.Element => {
+  const dispatch = useAppDispatch();
+
+  const { id } = useParams<{ id: string }>();
+  const questId = Number(id);
+
   const [isBookingModalOpened, setIsBookingModalOpened] = useState(false);
 
-  const {
-    title,
-    description,
-    coverImg,
-    type,
-    level,
-    peopleCount,
-    duration
-  } = quest;
+  const quest = useAppSelector((state) => state.detailedQuest);
 
   const onBookingBtnClick = () => {
     setIsBookingModalOpened(true);
   };
 
+  useEffect(() => {
+    let isMounted = true;
+    if (isMounted) {
+      const fetchData = async () => {
+        dispatch(fetchDetailedQuestAction(questId));
+      };
+      fetchData();
+    }
+    return () => {
+      isMounted = false;
+    };
+  }, [dispatch, questId]);
+
+
   return (
     <MainLayout>
       <S.Main>
         <S.PageImage
-          src={coverImg}
-          alt={`Квест ${title}`}
+          src={quest?.coverImg}
+          alt={`Квест ${quest?.title}`}
           width="1366"
           height="768"
         />
         <S.PageContentWrapper>
           <S.PageHeading>
-            <S.PageTitle>{title}</S.PageTitle>
-            <S.PageSubtitle>{type}</S.PageSubtitle>
+            <S.PageTitle>{quest?.title}</S.PageTitle>
+            <S.PageSubtitle>{QuestType[quest ? quest.type : 0]}</S.PageSubtitle>
           </S.PageHeading>
 
           <S.PageDescription>
             <S.Features>
               <S.FeaturesItem>
                 <IconClock width="20" height="20" />
-                <S.FeatureTitle>{duration} мин</S.FeatureTitle>
+                <S.FeatureTitle>{quest?.duration} мин</S.FeatureTitle>
               </S.FeaturesItem>
               <S.FeaturesItem>
                 <IconPerson width="19" height="24" />
-                <S.FeatureTitle>{peopleCount} чел</S.FeatureTitle>
+                <S.FeatureTitle>
+                  {
+                    quest?.peopleCount && quest.peopleCount.length > 1 ? `${quest?.peopleCount[0]}–${quest?.peopleCount[quest?.peopleCount.length - 1]}` : quest?.peopleCount
+                  } чел</S.FeatureTitle>
               </S.FeaturesItem>
               <S.FeaturesItem>
                 <IconPuzzle width="24" height="24" />
-                <S.FeatureTitle>{level}</S.FeatureTitle>
+                <S.FeatureTitle>{LevelType[quest ? quest.level : 0]}</S.FeatureTitle>
               </S.FeaturesItem>
             </S.Features>
 
             <S.QuestDescription>
-              {description}
+              {quest?.description}
             </S.QuestDescription>
 
             <S.QuestBookingBtn onClick={onBookingBtnClick}>

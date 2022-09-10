@@ -2,7 +2,7 @@ import * as S from '../quests-catalog/quests-catalog.styled';
 import { ReactComponent as IconPerson } from 'assets/img/icon-person.svg';
 import { ReactComponent as IconPuzzle } from 'assets/img/icon-puzzle.svg';
 import { Quest } from '../../../../types/quest'
-import { AppRoute } from 'helps/const';
+import { LevelType } from '../../../../helps/const';
 
 type QuestItemProps = {
   quest: Quest;
@@ -10,7 +10,7 @@ type QuestItemProps = {
 
 const QuestItem = ({ quest }: QuestItemProps): JSX.Element => (
   <S.QuestItem>
-    <S.QuestItemLink to={AppRoute.DetailedQuest}>
+    <S.QuestItemLink to={`/detailed-quest/${quest.id}`}>
       <S.Quest>
         <S.QuestImage
           src={quest.previewImg}
@@ -25,11 +25,13 @@ const QuestItem = ({ quest }: QuestItemProps): JSX.Element => (
           <S.QuestFeatures>
             <S.QuestFeatureItem>
               <IconPerson />
-              {quest.peopleCount} чел
+              {
+                quest?.peopleCount.length > 1 ? `${quest?.peopleCount[0]}–${quest?.peopleCount[quest?.peopleCount.length - 1]}` : quest?.peopleCount
+              } чел
             </S.QuestFeatureItem>
             <S.QuestFeatureItem>
               <IconPuzzle />
-              {quest.level}
+              {LevelType[quest.level]}
             </S.QuestFeatureItem>
           </S.QuestFeatures>
         </S.QuestContent>

@@ -1,22 +1,21 @@
 import { Quest, Quests } from "types/quest";
 import { createReducer } from '@reduxjs/toolkit';
-import { loadQuestList, setDetailedQuest } from "./action";
+import { fetchDetailedQuestAction, fetchQuestsListAction } from "./api-actions";
 
 type InitialState = {
     questList: Quests;
-    detailedQuest: Quest | null,
+    detailedQuest?: Quest,
 };
 const initialState: InitialState = {
     questList: [],
-    detailedQuest: null,
 };
 
 const reducer = createReducer(initialState, (builder) => {
     builder
-        .addCase(loadQuestList, (state, action) => {
+        .addCase(fetchQuestsListAction.fulfilled, (state, action) => {
             state.questList = action.payload;
         })
-        .addCase(setDetailedQuest, (state, action) => {
+        .addCase(fetchDetailedQuestAction.fulfilled, (state, action) => {
             state.detailedQuest = action.payload;
         });
 });
