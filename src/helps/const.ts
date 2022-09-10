@@ -11,6 +11,7 @@ enum APIRoute {
 }
 
 const QuestType: { [char: string]: string } = {
+  'allQuests': 'Все квесты',
   'adventures': 'Приключения',
   'horror': 'Ужасы',
   'mystic': 'Мистика',
@@ -24,9 +25,12 @@ const LevelType: { [char: string]: string } = {
   'hard': 'сложный',
 } as const;
 
+const genres = ['Все квесты', 'Приключения', 'Ужасы', 'Мистика', 'Детектив', 'Sci-fi'];
+
 export {
   AppRoute,
   APIRoute,
   QuestType,
-  LevelType
+  LevelType,
+  genres
 }
