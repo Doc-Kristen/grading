@@ -3,7 +3,7 @@ export const mockQuest = {
     title: "Работа",
     description: "Тебе придется ходить на работу и работать по графику 6/1",
     previewImg: "img/preview-sklep.jpg",
-    coverImg: "img/cover-sklep.jpg",
+    coverImg: 'img/cover-maniac.jpg',
     type: "horror",
     level: "hard",
     peopleCount: [1],

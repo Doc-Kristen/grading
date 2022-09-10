@@ -1,6 +1,6 @@
 export enum AppRoute {
-    Home = '/',
-    Quests = '/quests',
-    DetailedQuest = '/quests/:id',
-    Contacts = '/contacts',
-  };
+  Home = '/',
+  Quests = '/quests',
+  DetailedQuest = '/detailed-quest/:id',
+  Contacts = '/contacts',
+};

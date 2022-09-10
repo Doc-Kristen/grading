@@ -12,6 +12,7 @@ import NotFoundPage from 'components/not-found-page/not-found-page';
 import { appTheme } from './common';
 import * as S from './app.styled';
 import { AppRoute } from 'helps/const';
+import { mockQuest } from '../../helps/mock';
 
 const App = () => (
   <ThemeProvider theme={appTheme}>
@@ -22,7 +23,8 @@ const App = () => (
           <Home />
         </Route>
         <Route exact path={AppRoute.DetailedQuest}>
-          <DetailedQuest />
+          <DetailedQuest
+            quest={mockQuest} />
         </Route>
         <Route exact path={AppRoute.Contacts}>
           <Contacts />
