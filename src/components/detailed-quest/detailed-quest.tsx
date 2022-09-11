@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { fetchDetailedQuestAction } from 'store/api-actions';
-import { QuestType, LevelType } from '../../helps/const';
+import { QuestType, LevelType, BACKEND_URL } from '../../helps/const';
 
 const DetailedQuest = (): JSX.Element => {
 
@@ -44,7 +44,7 @@ const DetailedQuest = (): JSX.Element => {
     <MainLayout>
       <S.Main>
         <S.PageImage
-          src={quest?.coverImg}
+          src={`${BACKEND_URL}/${quest?.coverImg}`}
           alt={`Квест ${quest?.title}`}
           width="1366"
           height="768"

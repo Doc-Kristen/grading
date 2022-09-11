@@ -16,7 +16,7 @@ const QuestItem = ({ quest }: QuestItemProps): JSX.Element => (
           src={quest.previewImg}
           width="344"
           height="232"
-          alt={quest.title}
+          alt={`Квест ${quest.title}`}
         />
 
         <S.QuestContent>
