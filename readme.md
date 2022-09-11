@@ -1,4 +1,4 @@
-Имя студента: Кристина Мищенко [https://up.htmlacademy.ru/profession/react/9/react/10/user/959701]
+Имя студента: [Кристина Мищенко](https://up.htmlacademy.ru/react/10/user/959701).
 Время затраченное на разработку проекта:
 
 ## Скрипты

@@ -1,5 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
-import { BACKEND_URL } from 'helps/const';
+
+const BACKEND_URL = 'http://localhost:3001';
 
 const REQUEST_TIMEOUT = 5000;
 

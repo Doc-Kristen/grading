@@ -4,6 +4,7 @@ import { useRef, FormEvent } from 'react';
 import { sendOrder } from 'store/api-actions';
 import { useAppDispatch } from 'hooks';
 import { OrderPost } from 'types/order-post';
+import { setModalStatus } from 'store/action';
 
 const BookingModal = () => {
   const dispatch = useAppDispatch();
@@ -46,7 +47,7 @@ const BookingModal = () => {
   return (
     <S.BlockLayer>
       <S.Modal>
-        <S.ModalCloseBtn>
+        <S.ModalCloseBtn onClick={() => dispatch(setModalStatus(false))}>
           <IconClose width="16" height="16" />
           <S.ModalCloseLabel>Закрыть окно</S.ModalCloseLabel>
         </S.ModalCloseBtn>

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { MainLayout } from 'components/common/common';
 import { ReactComponent as IconClock } from 'assets/img/icon-clock.svg';
 import { ReactComponent as IconPerson } from 'assets/img/icon-person.svg';
@@ -9,42 +8,42 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { fetchDetailedQuestAction } from 'store/api-actions';
-import { QuestType, LevelType, BACKEND_URL } from '../../helps/const';
+import { QuestType, LevelType } from '../../helps/const';
+import { setModalStatus } from 'store/action';
 
 const DetailedQuest = (): JSX.Element => {
 
   const dispatch = useAppDispatch();
 
   const { id } = useParams<{ id: string }>();
-  const questId = Number(id);
 
-  const [isBookingModalOpened, setIsBookingModalOpened] = useState(false);
+  const { isFormOpen } = useAppSelector((state) => state);
 
   const quest = useAppSelector((state) => state.detailedQuest);
 
   const onBookingBtnClick = () => {
-    setIsBookingModalOpened(true);
+    dispatch(setModalStatus(true));
   };
 
   useEffect(() => {
     let isMounted = true;
     if (isMounted) {
       const fetchData = async () => {
-        dispatch(fetchDetailedQuestAction(questId));
+        dispatch(fetchDetailedQuestAction(id));
       };
       fetchData();
     }
     return () => {
       isMounted = false;
     };
-  }, [dispatch, questId]);
+  }, [dispatch, id]);
 
 
   return (
     <MainLayout>
       <S.Main>
         <S.PageImage
-          src={`${BACKEND_URL}/${quest?.coverImg}`}
+          src={`http://localhost:3000/${quest?.coverImg}`}
           alt={`Квест ${quest?.title}`}
           width="1366"
           height="768"
@@ -84,7 +83,7 @@ const DetailedQuest = (): JSX.Element => {
           </S.PageDescription>
         </S.PageContentWrapper>
 
-        {isBookingModalOpened && <BookingModal />}
+        {isFormOpen && <BookingModal />}
       </S.Main>
     </MainLayout>
   );

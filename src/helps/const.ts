@@ -1,10 +1,10 @@
-const BACKEND_URL = 'http://localhost:3001';
 
 enum AppRoute {
   Home = '/',
   Quests = '/quests',
   DetailedQuest = '/detailed-quest/:id',
   Contacts = '/contacts',
+  NotFound = '*',
 };
 
 enum APIRoute {
@@ -30,7 +30,6 @@ const LevelType: { [char: string]: string } = {
 const genres = ['Все квесты', 'Приключения', 'Ужасы', 'Мистика', 'Детектив', 'Sci-fi'];
 
 export {
-  BACKEND_URL,
   AppRoute,
   APIRoute,
   QuestType,
