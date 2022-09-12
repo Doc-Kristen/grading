@@ -1,6 +1,6 @@
 import * as S from '../quests-catalog/quests-catalog.styled';
 import { ReactComponent as IconAdventures } from 'assets/img/icon-adventures.svg';
-import { QuestType, genres } from '../../../../helps/const';
+import { genres } from '../../../../helps/const';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { selectGenre } from 'store/action';
 
@@ -19,7 +19,7 @@ const Filter = (): JSX.Element => {
                             dispatch(selectGenre(genre));
                         }}
                     >
-                        <S.TabBtn isActive={QuestType[genre] === selectedGenre ? true : false}>
+                        <S.TabBtn isActive={genre === selectedGenre ? true : false}>
                             <IconAdventures />
                             <S.TabTitle>{genre}</S.TabTitle>
                         </S.TabBtn>

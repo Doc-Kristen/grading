@@ -6,7 +6,7 @@ import {
 } from 'components/common/common';
 import DetailedQuest from 'components/detailed-quest/detailed-quest';
 import Contacts from 'components/contacts/contacts';
-import Home from 'components/home/home';
+import Home from '../home/home';
 import NotFoundPage from 'components/not-found-page/not-found-page';
 import browserHistory from '../../browser-history';
 

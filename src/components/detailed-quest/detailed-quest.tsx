@@ -82,7 +82,6 @@ const DetailedQuest = (): JSX.Element => {
             </S.QuestBookingBtn>
           </S.PageDescription>
         </S.PageContentWrapper>
-
         {isFormOpen && <BookingModal />}
       </S.Main>
     </MainLayout>

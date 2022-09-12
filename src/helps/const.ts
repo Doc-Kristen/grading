@@ -1,10 +1,20 @@
-
+const ORGANIZATION_ADDRESS = {
+  name: 'Санкт-Петербург',
+  location: {
+    latitude: 59.96848,
+    longitude: 30.31655,
+    zoom: 15
+  }
+};
 enum AppRoute {
   Home = '/',
   Quests = '/quests',
   DetailedQuest = '/detailed-quest/:id',
-  Contacts = '/contacts',
   NotFound = '*',
+  Beginners = '#',
+  Reviews = '#',
+  Promo = '#',
+  Contacts = '/contacts',
 };
 
 enum APIRoute {
@@ -29,10 +39,35 @@ const LevelType: { [char: string]: string } = {
 
 const genres = ['Все квесты', 'Приключения', 'Ужасы', 'Мистика', 'Детектив', 'Sci-fi'];
 
+const LinkType = [
+  {
+    title: 'Квесты',
+    link: AppRoute.Home
+  },
+  {
+    title: 'Новичкам',
+    link: AppRoute.Beginners
+  },
+  {
+    title: 'Отзывы',
+    link: AppRoute.Reviews
+  },
+  {
+    title: 'Акции',
+    link: AppRoute.Promo
+  },
+  {
+    title: 'Контакты',
+    link: AppRoute.Contacts
+  },
+] as const;
+
 export {
+  ORGANIZATION_ADDRESS,
   AppRoute,
   APIRoute,
   QuestType,
   LevelType,
-  genres
+  LinkType,
+  genres,
 }
