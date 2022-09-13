@@ -6,11 +6,12 @@ const ORGANIZATION_ADDRESS = {
     zoom: 15
   }
 };
+
 enum AppRoute {
   Home = '/',
   Quests = '/quests',
   DetailedQuest = '/detailed-quest/:id',
-  NotFound = '*',
+  NotFound = '/*',
   Beginners = '#',
   Reviews = '#',
   Promo = '#',
@@ -62,6 +63,11 @@ const LinkType = [
   },
 ] as const;
 
+enum NameSpace {
+  Data = 'DATA',
+  Order = 'QUESTS',
+}
+
 export {
   ORGANIZATION_ADDRESS,
   AppRoute,
@@ -70,4 +76,5 @@ export {
   LevelType,
   LinkType,
   genres,
+  NameSpace
 }

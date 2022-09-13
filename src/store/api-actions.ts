@@ -4,7 +4,7 @@ import { AppDispatch, State } from '../types/state';
 import { Quest, Quests } from 'types/quest';
 import { APIRoute, AppRoute } from 'helps/const';
 import { OrderPost } from 'types/order-post';
-import { redirectToRoute, setModalStatus } from './action';
+import { redirectToRoute, setModalBlockingStatus, setModalOpeningStatus } from './action';
 // import { saveToken } from 'services/token';
 
 export const fetchQuestsListAction = createAsyncThunk<Quests, void, {
@@ -14,8 +14,14 @@ export const fetchQuestsListAction = createAsyncThunk<Quests, void, {
 }>(
   'data/fetchQuestsList',
   async (_arg, { extra: api }) => {
-    const { data } = await api.get<Quests>(APIRoute.Quests);
-    return data;
+    try {
+      const { data } = await api.get<Quests>(APIRoute.Quests);
+      return data;
+    }
+    catch (err) {
+      console.error(err);
+      return [];
+    }
   },
 );
 
@@ -31,7 +37,6 @@ export const fetchDetailedQuestAction = createAsyncThunk<Quest, string, {
       return data;
     }
     catch {
-      console.log('Error');
       dispatch(redirectToRoute(AppRoute.NotFound));
     }
   },
@@ -45,11 +50,14 @@ export const sendOrder = createAsyncThunk<void, OrderPost, {
   'user/postOrder',
   async (order: OrderPost, { dispatch, extra: api }) => {
     try {
+      dispatch(setModalBlockingStatus(true));
       const { data } = await api.post(APIRoute.Orders, order);
-      dispatch(setModalStatus(false));
+      dispatch(setModalBlockingStatus(false));
+      dispatch(setModalOpeningStatus(false));
       return data;
     }
     catch (err) {
+      dispatch(setModalBlockingStatus(false));
       console.error(err);
     }
   }

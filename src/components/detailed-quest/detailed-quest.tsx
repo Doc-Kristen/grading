@@ -9,7 +9,9 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { fetchDetailedQuestAction } from 'store/api-actions';
 import { QuestType, LevelType } from '../../helps/const';
-import { setModalStatus } from 'store/action';
+import { setModalOpeningStatus } from 'store/action';
+import NotFoundPage from 'components/not-found-page/not-found-page';
+import Loading from 'components/loading/loading';
 
 const DetailedQuest = (): JSX.Element => {
 
@@ -17,12 +19,12 @@ const DetailedQuest = (): JSX.Element => {
 
   const { id } = useParams<{ id: string }>();
 
-  const { isFormOpen } = useAppSelector((state) => state);
+  const { isFormOpened, isDataLoaded } = useAppSelector((state) => state);
 
   const quest = useAppSelector((state) => state.detailedQuest);
 
   const onBookingBtnClick = () => {
-    dispatch(setModalStatus(true));
+    dispatch(setModalOpeningStatus(true));
   };
 
   useEffect(() => {
@@ -38,6 +40,13 @@ const DetailedQuest = (): JSX.Element => {
     };
   }, [dispatch, id]);
 
+  if (isDataLoaded) {
+    return <Loading />
+  }
+
+  if (!quest && !isDataLoaded) {
+    return <NotFoundPage />
+  }
 
   return (
     <MainLayout>
@@ -82,7 +91,7 @@ const DetailedQuest = (): JSX.Element => {
             </S.QuestBookingBtn>
           </S.PageDescription>
         </S.PageContentWrapper>
-        {isFormOpen && <BookingModal />}
+        {isFormOpened && <BookingModal />}
       </S.Main>
     </MainLayout>
   );

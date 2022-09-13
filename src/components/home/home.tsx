@@ -11,10 +11,17 @@ import { selectGenre } from 'store/action';
 import { QuestsCatalog } from './components/components';
 import * as S from './home.styled';
 
-const HomePage = () => {
+const HomePage = (): JSX.Element => {
   const dispatch = useAppDispatch();
+
   useEffect(() => {
-    dispatch(selectGenre(QuestType['allQuests']));
+    let isMounted = true;
+    if (isMounted) {
+      dispatch(selectGenre(QuestType['allQuests']));
+    }
+    return () => {
+      isMounted = false;
+    };
   });
   return (
     <MainLayout>

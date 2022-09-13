@@ -2,9 +2,9 @@ import * as S from './booking-modal.styled';
 import { ReactComponent as IconClose } from 'assets/img/icon-close.svg';
 import { useRef, FormEvent } from 'react';
 import { sendOrder } from 'store/api-actions';
-import { useAppDispatch } from 'hooks';
+import { useAppDispatch, useAppSelector } from 'hooks';
 import { OrderPost } from 'types/order-post';
-import { setModalStatus } from 'store/action';
+import { setModalOpeningStatus } from 'store/action';
 
 const BookingModal = () => {
   const dispatch = useAppDispatch();
@@ -13,6 +13,8 @@ const BookingModal = () => {
   const phoneRef = useRef<HTMLInputElement | null>(null);
   const peopleRef = useRef<HTMLInputElement | null>(null);
   const legalRef = useRef<HTMLInputElement | null>(null);
+
+  const { isFormBlocked } = useAppSelector((state) => state);
 
   const onSubmit = (authData: OrderPost) => {
     dispatch(sendOrder(authData));
@@ -47,7 +49,7 @@ const BookingModal = () => {
   return (
     <S.BlockLayer>
       <S.Modal>
-        <S.ModalCloseBtn onClick={() => dispatch(setModalStatus(false))}>
+        <S.ModalCloseBtn onClick={() => dispatch(setModalOpeningStatus(false))}>
           <IconClose width="16" height="16" />
           <S.ModalCloseLabel>Закрыть окно</S.ModalCloseLabel>
         </S.ModalCloseBtn>
@@ -66,6 +68,7 @@ const BookingModal = () => {
               name="booking-name"
               placeholder="Имя"
               ref={nameRef}
+              disabled={isFormBlocked}
               required
             />
           </S.BookingField>
@@ -82,6 +85,7 @@ const BookingModal = () => {
                 handleInputChange(evt);
               }}
               ref={phoneRef}
+              disabled={isFormBlocked}
               required
             />
           </S.BookingField>
@@ -95,16 +99,18 @@ const BookingModal = () => {
               name="booking-people"
               placeholder="Количество участников"
               ref={peopleRef}
+              disabled={isFormBlocked}
               required
             />
           </S.BookingField>
-          <S.BookingSubmit type="submit">Отправить заявку</S.BookingSubmit>
+          <S.BookingSubmit disabled={isFormBlocked} type="submit">Отправить заявку</S.BookingSubmit>
           <S.BookingCheckboxWrapper>
             <S.BookingCheckboxInput
               type="checkbox"
               id="booking-legal"
               name="booking-legal"
               ref={legalRef}
+              disabled={isFormBlocked}
               required
             />
             <S.BookingCheckboxLabel

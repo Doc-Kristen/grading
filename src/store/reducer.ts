@@ -3,20 +3,24 @@ import { createReducer } from '@reduxjs/toolkit';
 import { fetchDetailedQuestAction, fetchQuestsListAction } from "./api-actions";
 import { QuestType } from "helps/const";
 import { getQuestsByGenre } from "helps/utils";
-import { selectGenre, setModalStatus } from "./action";
+import { selectGenre, setModalOpeningStatus, setModalBlockingStatus } from "./action";
 
 type InitialState = {
     questsList: Quests;
     filteredQuestList: Quests;
     detailedQuest?: Quest,
     selectedGenre: string,
-    isFormOpen: boolean
+    isDataLoaded: boolean,
+    isFormOpened: boolean,
+    isFormBlocked: boolean
 };
 const initialState: InitialState = {
     questsList: [],
     filteredQuestList: [],
     selectedGenre: QuestType['allQuests'],
-    isFormOpen: false
+    isDataLoaded: false,
+    isFormOpened: false,
+    isFormBlocked: false
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -25,16 +29,26 @@ const reducer = createReducer(initialState, (builder) => {
             state.questsList = action.payload;
             state.filteredQuestList = state.questsList;
         })
+        .addCase(fetchDetailedQuestAction.pending, (state) => {
+            state.isDataLoaded = true;
+        })
         .addCase(fetchDetailedQuestAction.fulfilled, (state, action) => {
             state.detailedQuest = action.payload;
+            state.isDataLoaded = false;
+        })
+        .addCase(fetchDetailedQuestAction.rejected, (state) => {
+            state.isDataLoaded = false;
         })
         .addCase(selectGenre, (state, action) => {
             state.selectedGenre = action.payload;
             state.filteredQuestList = state.selectedGenre !== QuestType['allQuests'] ? getQuestsByGenre(state.questsList, state.selectedGenre) : state.questsList;
         })
-        .addCase(setModalStatus, (state, action) => {
-            state.isFormOpen = action.payload;
-        });
+        .addCase(setModalOpeningStatus, (state, action) => {
+            state.isFormOpened = action.payload;
+        })
+        .addCase(setModalBlockingStatus, (state, action) => {
+            state.isFormBlocked = action.payload;
+        })
 });
 
 export { reducer };

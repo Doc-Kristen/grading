@@ -10,8 +10,7 @@ export const redirect: Middleware<unknown, Reducer> =
         (next) =>
             (action) => {
                 if (action.type === Action.REDIRECT_TO_ROUTE) {
-                    browserHistory.push(action.payload);
+                    browserHistory.push(action.payload, '/');
                 }
-
                 return next(action);
             };
