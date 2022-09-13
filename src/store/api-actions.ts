@@ -13,13 +13,8 @@ export const fetchQuestsListAction = createAsyncThunk<Quests, void, {
 }>(
   'data/fetchQuestsList',
   async (_arg, { extra: api }) => {
-    // try {
     const { data } = await api.get<Quests>(APIRoute.Quests);
     return data;
-    // }
-    // catch {
-    //   return [];
-    // }
   },
 );
 

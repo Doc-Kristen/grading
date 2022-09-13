@@ -65,16 +65,17 @@ const LinkType = [
 
 enum NameSpace {
   Data = 'DATA',
-  Order = 'QUESTS',
+  Quest = 'QUEST',
+  User = 'USER',
 }
 
 export {
   ORGANIZATION_ADDRESS,
+  NameSpace,
   AppRoute,
   APIRoute,
   QuestType,
   LevelType,
   LinkType,
   genres,
-  NameSpace
 }
