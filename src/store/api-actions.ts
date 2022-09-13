@@ -5,7 +5,6 @@ import { Quest, Quests } from 'types/quest';
 import { APIRoute, AppRoute } from 'helps/const';
 import { OrderPost } from 'types/order-post';
 import { redirectToRoute, setModalBlockingStatus, setModalOpeningStatus } from './action';
-// import { saveToken } from 'services/token';
 
 export const fetchQuestsListAction = createAsyncThunk<Quests, void, {
   dispatch: AppDispatch,
@@ -14,14 +13,13 @@ export const fetchQuestsListAction = createAsyncThunk<Quests, void, {
 }>(
   'data/fetchQuestsList',
   async (_arg, { extra: api }) => {
-    try {
-      const { data } = await api.get<Quests>(APIRoute.Quests);
-      return data;
-    }
-    catch (err) {
-      console.error(err);
-      return [];
-    }
+    // try {
+    const { data } = await api.get<Quests>(APIRoute.Quests);
+    return data;
+    // }
+    // catch {
+    //   return [];
+    // }
   },
 );
 
@@ -56,9 +54,8 @@ export const sendOrder = createAsyncThunk<void, OrderPost, {
       dispatch(setModalOpeningStatus(false));
       return data;
     }
-    catch (err) {
+    catch {
       dispatch(setModalBlockingStatus(false));
-      console.error(err);
     }
   }
 );

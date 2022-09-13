@@ -10,6 +10,7 @@ type InitialState = {
     filteredQuestList: Quests;
     detailedQuest?: Quest,
     selectedGenre: string,
+    isServerError: boolean,
     isDataLoaded: boolean,
     isFormOpened: boolean,
     isFormBlocked: boolean
@@ -18,6 +19,7 @@ const initialState: InitialState = {
     questsList: [],
     filteredQuestList: [],
     selectedGenre: QuestType['allQuests'],
+    isServerError: false,
     isDataLoaded: false,
     isFormOpened: false,
     isFormBlocked: false
@@ -28,6 +30,10 @@ const reducer = createReducer(initialState, (builder) => {
         .addCase(fetchQuestsListAction.fulfilled, (state, action) => {
             state.questsList = action.payload;
             state.filteredQuestList = state.questsList;
+            state.isServerError = false;
+        })
+        .addCase(fetchQuestsListAction.rejected, (state) => {
+            state.isServerError = true;
         })
         .addCase(fetchDetailedQuestAction.pending, (state) => {
             state.isDataLoaded = true;

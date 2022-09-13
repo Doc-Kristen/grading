@@ -2,15 +2,16 @@ import * as S from './quests-catalog.styled';
 import QuestItem from '../quest-item/quest-item';
 import { useAppSelector } from 'hooks';
 import Filter from '../filter/filter';
+import ServerError from 'components/server-error/server-error';
 
 const QuestsCatalog = (): JSX.Element => {
 
-  const { filteredQuestList } = useAppSelector((state) => state);
+  const { filteredQuestList, isServerError } = useAppSelector((state) => state);
 
   return (
     <>
       <Filter />
-      <S.QuestsList>
+      {isServerError ? <ServerError /> : <S.QuestsList>
         {
           filteredQuestList.map((quest) => (
             <QuestItem
@@ -20,7 +21,19 @@ const QuestsCatalog = (): JSX.Element => {
           ))
         }
 
-      </S.QuestsList>
+      </S.QuestsList>}
+
+      {/* <S.QuestsList>
+        {
+          filteredQuestList.map((quest) => (
+            <QuestItem
+              key={quest.id}
+              quest={quest}
+            />
+          ))
+        }
+
+      </S.QuestsList> */}
     </>
   );
 };
