@@ -2,7 +2,7 @@ import * as S from '../quests-catalog/quests-catalog.styled';
 import { ReactComponent as IconPerson } from 'assets/img/icon-person.svg';
 import { ReactComponent as IconPuzzle } from 'assets/img/icon-puzzle.svg';
 import { Quest } from '../../../../types/quest'
-import { LevelType } from '../../../../helps/const';
+import { LevelType } from '../../../../helpers/const';
 
 type QuestItemProps = {
   quest: Quest;

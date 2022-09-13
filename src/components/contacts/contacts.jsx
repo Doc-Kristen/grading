@@ -1,7 +1,7 @@
 import { MainLayout, PageTitle, PageSubtext } from 'components/common/common';
 import * as S from './contacts.styled';
 import Map from './map/map';
-import { ORGANIZATION_ADDRESS } from 'helps/const';
+import { ORGANIZATION_ADDRESS } from 'helpers/const';
 
 const Contacts = () => (
   <MainLayout>

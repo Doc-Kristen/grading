@@ -1,8 +1,8 @@
 import { Quest, Quests } from "types/quest";
 import { createReducer } from '@reduxjs/toolkit';
 import { fetchDetailedQuestAction, fetchQuestsListAction } from "./api-actions";
-import { QuestType } from "helps/const";
-import { getQuestsByGenre } from "helps/utils";
+import { QuestType } from "helpers/const";
+import { getQuestsByGenre } from "helpers/utils";
 import { selectGenre, setModalOpeningStatus, setModalBlockingStatus } from "./action";
 
 type InitialState = {

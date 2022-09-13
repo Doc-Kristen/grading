@@ -1,4 +1,4 @@
-import { LinkType } from 'helps/const';
+import { LinkType } from 'helpers/const';
 import { useLocation } from 'react-router-dom';
 import * as S from '../header/header.styled';
 

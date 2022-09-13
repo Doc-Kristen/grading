@@ -1,4 +1,4 @@
-import { AppRoute } from "helps/const";
+import { AppRoute } from "helpers/const";
 import { Link } from "react-router-dom";
 
 const NotFoundPage = (): JSX.Element => (

@@ -4,7 +4,7 @@ import {
   PageHeading,
   PageSubtext,
 } from 'components/common/common';
-import { QuestType } from 'helps/const';
+import { QuestType } from 'helpers/const';
 import { useAppDispatch } from 'hooks';
 import { useEffect } from 'react';
 import { selectGenre } from 'store/action';

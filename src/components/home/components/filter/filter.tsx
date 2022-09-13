@@ -1,6 +1,6 @@
 import * as S from '../quests-catalog/quests-catalog.styled';
 import { ReactComponent as IconAdventures } from 'assets/img/icon-adventures.svg';
-import { genres } from '../../../../helps/const';
+import { genres } from '../../../../helpers/const';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { selectGenre } from 'store/action';
 

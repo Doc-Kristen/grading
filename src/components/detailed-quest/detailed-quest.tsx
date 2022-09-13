@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { fetchDetailedQuestAction } from 'store/api-actions';
-import { QuestType, LevelType } from '../../helps/const';
+import { QuestType, LevelType } from '../../helpers/const';
 import { setModalOpeningStatus } from 'store/action';
 import NotFoundPage from 'components/not-found-page/not-found-page';
 import Loading from 'components/loading/loading';

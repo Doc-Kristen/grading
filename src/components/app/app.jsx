@@ -12,7 +12,7 @@ import browserHistory from '../../browser-history';
 
 import { appTheme } from './common';
 import * as S from './app.styled';
-import { AppRoute } from 'helps/const';
+import { AppRoute } from 'helpers/const';
 
 const App = () => (
   <ThemeProvider theme={appTheme}>

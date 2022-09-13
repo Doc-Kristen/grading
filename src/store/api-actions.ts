@@ -2,7 +2,7 @@ import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state';
 import { Quest, Quests } from 'types/quest';
-import { APIRoute, AppRoute } from 'helps/const';
+import { APIRoute, AppRoute } from 'helpers/const';
 import { OrderPost } from 'types/order-post';
 import { redirectToRoute, setModalBlockingStatus, setModalOpeningStatus } from './action';
 
