@@ -4,15 +4,19 @@ import 'leaflet/dist/leaflet.css';
 import useMap from 'hooks/useMap';
 import * as S from '../contacts.styled';
 import { City } from 'types/city';
+import { URL_MARKER_DEFAULT, URL_MARKER_SHADOW } from 'helpers/const';
 
 type MapProps = {
     city: City;
 };
 
 const defaultCustomIcon = new Icon({
-    iconUrl: 'img/keks.svg',
+    iconUrl: URL_MARKER_DEFAULT,
+    shadowUrl: URL_MARKER_SHADOW,
     iconSize: [40, 40],
-    iconAnchor: [20, 40]
+    shadowSize: [40, 40],
+    shadowAnchor: [20, 20],
+    iconAnchor: [20, 20],
 });
 
 const Map = (props: MapProps): JSX.Element => {
@@ -23,7 +27,7 @@ const Map = (props: MapProps): JSX.Element => {
         if (map) {
             const marker = new Marker({
                 lat: city.location.latitude,
-                lng: city.location.longitude
+                lng: city.location.longitude,
             });
 
             marker

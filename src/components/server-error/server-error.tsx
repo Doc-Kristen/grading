@@ -1,5 +1,5 @@
 const ServerError = (): JSX.Element => (
-    <p>The server is unavailable. Please, try again later.</p>
+    <p>Сервер временно недоступен. Воспользуйтесь другими разделами сайта, либо попробуйте зайти позже.</p>
 );
 
 export default ServerError;

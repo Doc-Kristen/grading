@@ -1,12 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from 'helpers/const';
-import { setModalBlockingStatus, setModalOpeningStatus } from 'store/action';
+import { setModalOpeningStatus, setOrderErrorStatus } from 'store/action';
 import { sendOrder } from 'store/api-actions';
 import { UserProcess } from 'types/state';
 
 const initialState: UserProcess = {
     isFormOpened: false,
-    isFormBlocked: false
+    isFormBlocked: false,
+    isOrderPosted: false,
+    isOrderError: false,
 };
 
 export const userProcess = createSlice({
@@ -20,16 +22,21 @@ export const userProcess = createSlice({
             })
             .addCase(sendOrder.pending, (state) => {
                 state.isFormBlocked = true;
+                state.isOrderPosted = true;
             })
             .addCase(sendOrder.fulfilled, (state) => {
                 state.isFormBlocked = false;
                 state.isFormOpened = false;
+                state.isOrderPosted = false;
+                state.isOrderError = false;
             })
             .addCase(sendOrder.rejected, (state) => {
                 state.isFormBlocked = false;
+                state.isOrderPosted = false;
+                state.isOrderError = true;
             })
-            .addCase(setModalBlockingStatus, (state, action) => {
-                state.isFormBlocked = action.payload;
-            });
+            .addCase(setOrderErrorStatus, (state, action) => {
+                state.isOrderError = action.payload
+            })
     }
 });

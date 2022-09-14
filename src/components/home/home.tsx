@@ -7,11 +7,12 @@ import {
 import { QuestType } from 'helpers/const';
 import { useAppDispatch } from 'hooks';
 import { useEffect } from 'react';
-import { selectGenre } from 'store/action';
+import { selectGenre } from 'store/quest-process/quest-process';
 import { QuestsCatalog } from './components/components';
 import * as S from './home.styled';
 
 const HomePage = (): JSX.Element => {
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -23,6 +24,7 @@ const HomePage = (): JSX.Element => {
       isMounted = false;
     };
   });
+
   return (
     <MainLayout>
       <S.Main forwardedAs="main">

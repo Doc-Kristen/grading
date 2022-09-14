@@ -12,6 +12,8 @@ import { QuestType, LevelType } from '../../helpers/const';
 import { setModalOpeningStatus } from 'store/action';
 import NotFoundPage from 'components/not-found-page/not-found-page';
 import Loading from 'components/loading/loading';
+import { getFormOpenedStatus } from 'store/user-process/selectors';
+import { getDataLoadedStatus, getQuest } from 'store/quest-data/selectors';
 
 const DetailedQuest = (): JSX.Element => {
 
@@ -19,11 +21,11 @@ const DetailedQuest = (): JSX.Element => {
 
   const { id } = useParams<{ id: string }>();
 
-  const { isFormOpened, isDataLoaded } = useAppSelector((state) => state);
+  const isFormOpened = useAppSelector(getFormOpenedStatus);
+  const isDataLoaded = useAppSelector(getDataLoadedStatus);
+  const quest = useAppSelector(getQuest);
 
-  const quest = useAppSelector((state) => state.detailedQuest);
-
-  const onBookingBtnClick = () => {
+  const handleButtonClick = () => {
     dispatch(setModalOpeningStatus(true));
   };
 
@@ -52,7 +54,7 @@ const DetailedQuest = (): JSX.Element => {
     <MainLayout>
       <S.Main>
         <S.PageImage
-          src={`http://localhost:3000/${quest?.coverImg}`}
+          src={`/${quest?.coverImg}`}
           alt={`Квест ${quest?.title}`}
           width="1366"
           height="768"
@@ -60,7 +62,7 @@ const DetailedQuest = (): JSX.Element => {
         <S.PageContentWrapper>
           <S.PageHeading>
             <S.PageTitle>{quest?.title}</S.PageTitle>
-            <S.PageSubtitle>{QuestType[quest ? quest.type : 0]}</S.PageSubtitle>
+            <S.PageSubtitle>{QuestType[quest ? quest.type : '']}</S.PageSubtitle>
           </S.PageHeading>
 
           <S.PageDescription>
@@ -78,7 +80,7 @@ const DetailedQuest = (): JSX.Element => {
               </S.FeaturesItem>
               <S.FeaturesItem>
                 <IconPuzzle width="24" height="24" />
-                <S.FeatureTitle>{LevelType[quest ? quest.level : 0]}</S.FeatureTitle>
+                <S.FeatureTitle>{LevelType[quest ? quest.level : '']}</S.FeatureTitle>
               </S.FeaturesItem>
             </S.Features>
 
@@ -86,7 +88,7 @@ const DetailedQuest = (): JSX.Element => {
               {quest?.description}
             </S.QuestDescription>
 
-            <S.QuestBookingBtn onClick={onBookingBtnClick}>
+            <S.QuestBookingBtn onClick={handleButtonClick}>
               Забронировать
             </S.QuestBookingBtn>
           </S.PageDescription>

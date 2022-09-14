@@ -4,7 +4,7 @@ import { AppDispatch, State } from '../types/state';
 import { Quest, Quests } from 'types/quest';
 import { APIRoute, AppRoute } from 'helpers/const';
 import { OrderPost } from 'types/order-post';
-import { redirectToRoute, setModalBlockingStatus, setModalOpeningStatus } from './action';
+import { redirectToRoute } from './action';
 
 export const fetchQuestsListAction = createAsyncThunk<Quests, void, {
   dispatch: AppDispatch,
@@ -41,16 +41,8 @@ export const sendOrder = createAsyncThunk<void, OrderPost, {
   extra: AxiosInstance
 }>(
   'user/postOrder',
-  async (order: OrderPost, { dispatch, extra: api }) => {
-    try {
-      dispatch(setModalBlockingStatus(true));
-      const { data } = await api.post(APIRoute.Orders, order);
-      dispatch(setModalBlockingStatus(false));
-      dispatch(setModalOpeningStatus(false));
-      return data;
-    }
-    catch {
-      dispatch(setModalBlockingStatus(false));
-    }
+  async (order: OrderPost, { extra: api }) => {
+    const { data } = await api.post(APIRoute.Orders, order);
+    return data;
   }
 );

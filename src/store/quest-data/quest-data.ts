@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { NameSpace} from 'helpers/const';
+import { NameSpace } from 'helpers/const';
 import { fetchDetailedQuestAction, fetchQuestsListAction } from 'store/api-actions';
 import { QuestData } from 'types/state';
 

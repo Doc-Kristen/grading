@@ -1,17 +1,23 @@
+const URL_MARKER_DEFAULT = 'img/icon-location.svg';
+
+const URL_MARKER_SHADOW = 'img/icon-blip.svg';
+
+const ERROR_MESSAGE_TIME = 2000;
+
 const ORGANIZATION_ADDRESS = {
   name: 'Санкт-Петербург',
   location: {
-    latitude: 59.96848,
-    longitude: 30.31655,
-    zoom: 15
+    latitude: 59.968322,
+    longitude: 30.31735,
+    zoom: 16
   }
 };
 
 enum AppRoute {
   Home = '/',
-  Quests = '/quests',
+  Quests = '/',
   DetailedQuest = '/detailed-quest/:id',
-  NotFound = '/*',
+  NotFound = '*',
   Beginners = '#',
   Reviews = '#',
   Promo = '#',
@@ -40,7 +46,7 @@ const LevelType: { [char: string]: string } = {
 
 const genres = ['Все квесты', 'Приключения', 'Ужасы', 'Мистика', 'Детектив', 'Sci-fi'];
 
-const LinkType = [
+const navigationLinks = [
   {
     title: 'Квесты',
     link: AppRoute.Home
@@ -61,7 +67,7 @@ const LinkType = [
     title: 'Контакты',
     link: AppRoute.Contacts
   },
-] as const;
+];
 
 enum NameSpace {
   Data = 'DATA',
@@ -76,6 +82,9 @@ export {
   APIRoute,
   QuestType,
   LevelType,
-  LinkType,
+  navigationLinks,
   genres,
+  URL_MARKER_DEFAULT,
+  URL_MARKER_SHADOW,
+  ERROR_MESSAGE_TIME
 }

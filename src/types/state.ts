@@ -1,8 +1,6 @@
 import { store } from '../store/index';
 import { Quest, Quests } from './quest';
 
-type State = ReturnType<typeof store.getState>;
-
 type AppDispatch = typeof store.dispatch;
 
 type QuestData = {
@@ -18,7 +16,11 @@ type QuestProcess = {
 
 type UserProcess = {
     isFormOpened: boolean,
-    isFormBlocked: boolean
+    isFormBlocked: boolean,
+    isOrderPosted: boolean,
+    isOrderError: boolean,
 };
+
+type State = ReturnType<typeof store.getState>;
 
 export type { State, AppDispatch, QuestData, UserProcess, QuestProcess };

@@ -4,9 +4,13 @@ import { useRef, FormEvent } from 'react';
 import { sendOrder } from 'store/api-actions';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { OrderPost } from 'types/order-post';
-import { setModalOpeningStatus } from 'store/action';
+import { setModalOpeningStatus, setOrderErrorStatus } from 'store/action';
+import { getFormBlockedStatus, getOrderErrorStatus, getOrderPostedStatus } from 'store/user-process/selectors';
+import ServerError from 'components/server-error/server-error';
+import { ERROR_MESSAGE_TIME } from 'helpers/const';
 
 const BookingModal = () => {
+
   const dispatch = useAppDispatch();
 
   const nameRef = useRef<HTMLFormElement | null>(null);
@@ -14,7 +18,9 @@ const BookingModal = () => {
   const peopleRef = useRef<HTMLInputElement | null>(null);
   const legalRef = useRef<HTMLInputElement | null>(null);
 
-  const { isFormBlocked } = useAppSelector((state) => state);
+  const isFormBlocked = useAppSelector(getFormBlockedStatus);
+  const isOrderPosted = useAppSelector(getOrderPostedStatus);
+  const isOrderError = useAppSelector(getOrderErrorStatus);
 
   const onSubmit = (authData: OrderPost) => {
     dispatch(sendOrder(authData));
@@ -46,6 +52,13 @@ const BookingModal = () => {
       );
     }
   };
+
+  if (isOrderError) {
+    setTimeout(() => {
+      dispatch(setOrderErrorStatus(false));
+    }, ERROR_MESSAGE_TIME)
+  }
+
   return (
     <S.BlockLayer>
       <S.Modal>
@@ -103,7 +116,10 @@ const BookingModal = () => {
               required
             />
           </S.BookingField>
-          <S.BookingSubmit disabled={isFormBlocked} type="submit">Отправить заявку</S.BookingSubmit>
+          {
+            isOrderError ? <ServerError /> : null
+          }
+          <S.BookingSubmit disabled={isFormBlocked} type="submit">{isOrderPosted ? 'Отправка заявки...' : 'Отправить заявку'}</S.BookingSubmit>
           <S.BookingCheckboxWrapper>
             <S.BookingCheckboxInput
               type="checkbox"
