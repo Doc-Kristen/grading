@@ -27,7 +27,7 @@
     "start:client": "react-scripts --openssl-legacy-provider start",
     "start:server": "node server/server",
     "start": "concurrently -k -p \"{name}\" -n \"CLIENT,SERVER\" -c \"green,blue\" \"npm:start:client\" \"npm:start:server\"",
-    "build": "react-scripts build",
+    "build": "react-scripts --openssl-legacy-provider build",
     "eslint": "eslint --ext .jsx --ext .js src/"
   },
   "eslintConfig": {
