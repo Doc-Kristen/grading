@@ -1,0 +1,11 @@
+[build]
+  command = "npm run build"  # Команда для сборки клиентской части
+  publish = "client/build"   # Путь к клиентской сборке
+
+[build.environment]
+  REACT_APP_SERVER_URL = "/.netlify/functions/server"  # URL для серверных функций Netlify
+
+[[redirects]]
+  from = "/api/*"           # Перенаправление запросов, начинающихся с /api/ на серверную функцию
+  to = "/.netlify/functions/server/:splat"
+  status = 200
